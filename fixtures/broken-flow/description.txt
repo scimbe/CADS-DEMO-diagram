@@ -1,0 +1,5 @@
+Describe a request-authorization flowchart: An incoming request arrives at the edge. The
+edge checks the client cert chain and forwards to a decision step labeled 'trusted zone |
+2FA verified | mTLS pinned CA valid?'. If all three hold, route to Grant access; otherwise
+route to Deny access and log 'reason: one or more of {zone, 2FA, mTLS} failed' with a note
+that retries beyond 3 attempts trigger a lockout.

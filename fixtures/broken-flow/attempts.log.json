@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "promptKind": "initial",
+      "userPrompt": "Write Mermaid diagram source for the following description:\n\nDescribe a request-authorization flowchart: An incoming request arrives at the edge. The\nedge checks the client cert chain and forwards to a decision step labeled 'trusted zone |\n2FA verified | mTLS pinned CA valid?'. If all three hold, route to Grant access; otherwise\nroute to Deny access and log 'reason: one or more of {zone, 2FA, mTLS} failed' with a note\nthat retries beyond 3 attempts trigger a lockout.",
+      "dslSource": "flowchart TD\n    A[Incoming request] --> B[Check client cert chain]\n    B --> C{trusted zone | 2FA verified | mTLS pinned CA valid?}\n    C -->|Yes| D[Grant access]\n    C -->|No| E[Deny access]\n    E --> F[Log: reason: one or more of {zone, 2FA, mTLS} failed]\n    F --> G[Note: retries beyond 3 attempts trigger a lockout]",
+      "renderer": {
+        "ok": false,
+        "error": "Error: Parse error on line 3:\n... --> C{trusted zone | 2FA verified | mTL\n-----------------------^\nExpecting 'DIAMOND_STOP', 'TAGEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PIPE'"
+      }
+    },
+    {
+      "attempt": 2,
+      "promptKind": "correction",
+      "userPrompt": "The Mermaid source you wrote failed to render. Here is exactly what you wrote:\n\n```\nflowchart TD\n    A[Incoming request] --> B[Check client cert chain]\n    B --> C{trusted zone | 2FA verified | mTLS pinned CA valid?}\n    C -->|Yes| D[Grant access]\n    C -->|No| E[Deny access]\n    E --> F[Log: reason: one or more of {zone, 2FA, mTLS} failed]\n    F --> G[Note: retries beyond 3 attempts trigger a lockout]\n```\n\nHere is the exact error the Mermaid renderer reported:\n\n```\nError: Parse error on line 3:\n... --> C{trusted zone | 2FA verified | mTL\n-----------------------^\nExpecting 'DIAMOND_STOP', 'TAGEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PIPE'\n```\n\nFix the source so it renders without error, while still matching the original\ndescription as closely as possible. Output ONLY the corrected raw Mermaid source —\nno markdown code fences, no explanation.",
+      "dslSource": "flowchart TD\n    A[Incoming request] --> B[Check client cert chain]\n    B --> C{trusted zone<br>2FA verified<br>mTLS pinned CA valid?}\n    C -->|Yes| D[Grant access]\n    C -->|No| E[Deny access]\n    E --> F[Log: reason: one or more of {zone, 2FA, mTLS} failed]\n    F --> G[Note: retries beyond 3 attempts trigger a lockout]",
+      "renderer": {
+        "ok": false,
+        "error": "Error: Parse error on line 6:\n...son: one or more of {zone, 2FA, mTLS} fa\n-----------------------^\nExpecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'DIAMOND_START'"
+      }
+    },
+    {
+      "attempt": 3,
+      "promptKind": "correction",
+      "userPrompt": "The Mermaid source you wrote failed to render. Here is exactly what you wrote:\n\n```\nflowchart TD\n    A[Incoming request] --> B[Check client cert chain]\n    B --> C{trusted zone<br>2FA verified<br>mTLS pinned CA valid?}\n    C -->|Yes| D[Grant access]\n    C -->|No| E[Deny access]\n    E --> F[Log: reason: one or more of {zone, 2FA, mTLS} failed]\n    F --> G[Note: retries beyond 3 attempts trigger a lockout]\n```\n\nHere is the exact error the Mermaid renderer reported:\n\n```\nError: Parse error on line 6:\n...son: one or more of {zone, 2FA, mTLS} fa\n-----------------------^\nExpecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'DIAMOND_START'\n```\n\nFix the source so it renders without error, while still matching the original\ndescription as closely as possible. Output ONLY the corrected raw Mermaid source —\nno markdown code fences, no explanation.",
+      "dslSource": "flowchart TD\n    A[Incoming request] --> B[Check client cert chain]\n    B --> C{trusted zone<br>2FA verified<br>mTLS pinned CA valid?}\n    C -->|Yes| D[Grant access]\n    C -->|No| E[Deny access]\n    E --> F[Log: reason: one or more of zone, 2FA, mTLS failed]\n    F --> G[Note: retries beyond 3 attempts trigger a lockout]",
+      "renderer": {
+        "ok": true,
+        "imagePath": "/home/becke/CADS-DEMO-diagram/fixtures/broken-flow/output.png"
+      }
+    }
+  ]
+}
