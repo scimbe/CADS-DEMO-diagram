@@ -14,6 +14,28 @@ counting the first attempt).
 This is a CLI-only proof of the loop (see `#25` for scope reasoning) — no web UI, no
 tunnel/hostname exposure. That's a possible later phase once this core is proven.
 
+## Marketplace status
+
+This demo is published to the live **bunsenbrenner.org** registry
+(`registry.bunsenbrenner.org`) as a signed manifest. Verified present on 2026-08-29:
+
+- name `diagram`, latest version `0.1.1`, `installer_kind: binary`
+- publisher pubkey `1292c0cc…ce69b` (shared across the whole demo portfolio)
+- manifest id `984f5bce…14d5`
+
+Reproduce the check yourself:
+
+```bash
+curl -s https://registry.bunsenbrenner.org/manifests | grep '"name":"diagram"'
+```
+
+**Measured vs. claimed:** what is *measured* here is that the manifest — signed metadata
+plus a publisher-signed bundle reference — is listed on the registry. The registry's own
+guardrail verdict for a binary-kind manifest explicitly notes it is **not** a static bundle
+scan; trust rests on the publisher-pubkey allowlist checked at activation time. It is **not**
+a claim that an always-on hosted `*.bunsenbrenner.org` service exists — this is a CLI-only
+proof of the loop, and the web-UI/tunnel phase noted above remains future work.
+
 ## What's real here
 
 - The LLM call is a real HTTP request to the shared litellm-proxy
